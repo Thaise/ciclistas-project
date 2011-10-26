@@ -3,29 +3,37 @@ import java.util.Scanner;
 
 public class Ciclista {
 
-	public static void main(String[] args)throws CiclistaException{
+	public static void main(String[] args) {
 		Scanner entrada = new Scanner(System.in);
 		
-		while(true){			
-			System.out.println("Digite a dist�ncia percorrida em Km e o tempo gasto em horas:");
+		while(true){
+			System.out.println("Digite a distância percorrida em Km e o tempo gasto em horas:");
 			String valores = entrada.nextLine();
 			
-			double[] valores2 = interpretarValoresDeVelocidadeTempo(valores);
+			double[] valores2;
+			try {//para que a excessão seja em forma de mensagem colocamos todos os métodos que podem gerar excessão dentro do bloco try
+				valores2 = interpretarValoresDeVelocidadeTempo(valores);
+
+				double distancia = (double) valores2[0];
+				double tempo = (double) valores2[1];
+				
+				validando(distancia,tempo);
+				
+				calcularVelocidadeMedia(distancia,tempo);
+				
+				System.out.println(calcularVelocidadeMedia(distancia,tempo));
 			
-			double distancia = (double) valores2[0];
-			double tempo = (double) valores2[1];
-			
-			validando(distancia,tempo);
-			
-			calcularVelocidadeMedia(distancia,tempo);
-			
-			System.out.println(calcularVelocidadeMedia(distancia,tempo));
+			} catch (CiclistaException e) {// se algum deles der excessão aparecerá essa mensagem.
+				System.out.println("A distância e/ou a velocidade não podem ser zero!");
+			}
 		}
 	}
 	
 	public static double[] interpretarValoresDeVelocidadeTempo(String valores) throws CiclistaException {
 		
-		String[] separaValores = valores.split(" ");
+		String valorLimpo = valores.trim();//o trim() retira espaços antes e depois da string, evitando erros.
+		
+		String[] separaValores = valorLimpo.split(" ");
 		
 		double distancia = Double.parseDouble(separaValores[0]);
 		double tempo = Double.parseDouble(separaValores[1]);
@@ -43,7 +51,7 @@ public class Ciclista {
 		if(tempo != 0 && distancia != 0){
 			calcularVelocidadeMedia(distancia,tempo);
 		}else{
-			throw new CiclistaException("A dist�ncia e o tempo devem ser maiores que zero!");
+			throw new CiclistaException("A distância e o tempo devem ser maiores que zero!");
 		}
 		
 	}
