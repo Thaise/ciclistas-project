@@ -7,11 +7,11 @@ public class Ciclista {
 		Scanner entrada = new Scanner(System.in);
 		
 		while(true){
-			System.out.println("Digite a distância percorrida em Km e o tempo gasto em horas:");
+			System.out.print("Digite a DISTÂNCIA percorrida em KM e o TEMPO gasto em HORAS separados por um espaço:");
 			String valores = entrada.nextLine();
 			
 			double[] valores2;
-			try {//para que a excessão seja em forma de mensagem colocamos todos os métodos que podem gerar excessão dentro do bloco try
+			try {
 				valores2 = interpretarValoresDeVelocidadeTempo(valores);
 
 				double distancia = (double) valores2[0];
@@ -19,11 +19,11 @@ public class Ciclista {
 				
 				validando(distancia,tempo);
 				
-				calcularVelocidadeMedia(distancia,tempo);
+				System.out.println("Valocidade Média:"+calcularVelocidadeMedia(distancia,tempo));
 				
 				System.out.println(calcularVelocidadeMedia(distancia,tempo));
 			
-			} catch (CiclistaException e) {// se algum deles der excessão aparecerá essa mensagem.
+			} catch (CiclistaException e) {
 				System.out.println("A distância e/ou a velocidade não podem ser zero!");
 			}
 		}
@@ -31,9 +31,11 @@ public class Ciclista {
 	
 	public static double[] interpretarValoresDeVelocidadeTempo(String valores) throws CiclistaException {
 		
-		String valorLimpo = valores.trim();//o trim() retira espaços antes e depois da string, evitando erros.
-		
-		String[] separaValores = valorLimpo.split(" ");
+		String[] separaValores = valores.split(" ");
+			
+		if(separaValores.length < 2){
+			System.out.println("A DISTÂNCIA e o TEMPO devem ser fornecidos!");
+		}
 		
 		double distancia = Double.parseDouble(separaValores[0]);
 		double tempo = Double.parseDouble(separaValores[1]);
