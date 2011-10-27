@@ -50,48 +50,48 @@ public class CiclistaTest {
 	@Test
 	public void deveCalcularMedia1() {
 		double distancia = 20;
-		double tempo = 2;
-		double media = Ciclista.calcularVelocidadeMedia(distancia,tempo);
+		double velocidade = 2;
+		double media = Ciclista.calcularVelocidadeMedia(distancia,velocidade);
 		assertEquals(10,media,0);	
 	}
 	
 	@Test
 	public void deveCalcularMedia2() {
 		double distancia = 40;
-		double tempo = 2.5;
-		double media = Ciclista.calcularVelocidadeMedia(distancia,tempo);
+		double velocidade = 2.5;
+		double media = Ciclista.calcularVelocidadeMedia(distancia,velocidade);
 		assertEquals(16,media,0);	
 	}
 	
 	@Test
 	public void deveCalcularMedia3() {
 		double distancia = 30;
-		double tempo = 3.6;
-		double media = Ciclista.calcularVelocidadeMedia(distancia,tempo);
+		double velocidade = 3.6;
+		double media = Ciclista.calcularVelocidadeMedia(distancia,velocidade);
 		assertEquals(8.0,media,0);	
 	}
 	
 	@Test
 	public void deveCalcularMedia4() {
 		double distancia = 100;
-		double tempo = 50;
-		double media = Ciclista.calcularVelocidadeMedia(distancia,tempo);
+		double velocidade = 50;
+		double media = Ciclista.calcularVelocidadeMedia(distancia,velocidade);
 		assertEquals(2,media,0);	
 	}
 	
 	@Test
 	public void deveCalcularMedia5() {
 		double distancia = 36;
-		double tempo = 6;
-		double media = Ciclista.calcularVelocidadeMedia(distancia,tempo);
+		double velocidade = 6;
+		double media = Ciclista.calcularVelocidadeMedia(distancia,velocidade);
 		assertEquals(6,media,0);	
 	}
 	
 	@Test
 	public void deveCalcularMedia6() {
 		double distancia = 64;
-		double tempo = 8;
-		double media = Ciclista.calcularVelocidadeMedia(distancia,tempo);
+		double velocidade = 8;
+		double media = Ciclista.calcularVelocidadeMedia(distancia,velocidade);
 		assertEquals(8,media,0);	
 	}
 	
