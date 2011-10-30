@@ -48,7 +48,7 @@ public class CiclistaTest {
 	}
 	
 	@Test
-	public void deveCalcularMedia1() {
+	public void deveCalcularMedia1() throws CiclistaException {
 		double distancia = 20;
 		double velocidade = 2;
 		double media = Ciclista.calcularVelocidadeMedia(distancia,velocidade);
@@ -56,7 +56,7 @@ public class CiclistaTest {
 	}
 	
 	@Test
-	public void deveCalcularMedia2() {
+	public void deveCalcularMedia2() throws CiclistaException {
 		double distancia = 40;
 		double velocidade = 2.5;
 		double media = Ciclista.calcularVelocidadeMedia(distancia,velocidade);
@@ -64,7 +64,7 @@ public class CiclistaTest {
 	}
 	
 	@Test
-	public void deveCalcularMedia3() {
+	public void deveCalcularMedia3() throws CiclistaException {
 		double distancia = 30;
 		double velocidade = 3.6;
 		double media = Ciclista.calcularVelocidadeMedia(distancia,velocidade);
@@ -72,7 +72,7 @@ public class CiclistaTest {
 	}
 	
 	@Test
-	public void deveCalcularMedia4() {
+	public void deveCalcularMedia4() throws CiclistaException {
 		double distancia = 100;
 		double velocidade = 50;
 		double media = Ciclista.calcularVelocidadeMedia(distancia,velocidade);
@@ -80,7 +80,7 @@ public class CiclistaTest {
 	}
 	
 	@Test
-	public void deveCalcularMedia5() {
+	public void deveCalcularMedia5() throws CiclistaException {
 		double distancia = 36;
 		double velocidade = 6;
 		double media = Ciclista.calcularVelocidadeMedia(distancia,velocidade);
@@ -88,7 +88,7 @@ public class CiclistaTest {
 	}
 	
 	@Test
-	public void deveCalcularMedia6() {
+	public void deveCalcularMedia6() throws CiclistaException {
 		double distancia = 64;
 		double velocidade = 8;
 		double media = Ciclista.calcularVelocidadeMedia(distancia,velocidade);
