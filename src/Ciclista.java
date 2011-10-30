@@ -8,20 +8,15 @@ public class Ciclista {
 		
 		while(true){
 			System.out.print("Digite a DISTÂNCIA percorrida em KM e o TEMPO gasto em HORAS separados por um espaço:");
-			String valores = entrada.nextLine();
+			String valores = entrada.nextLine();	
 			
-			double[] valores2;
 			try {
-				valores2 = interpretarValoresDeVelocidadeTempo(valores);
+				double[] valores2 = interpretarValoresDeVelocidadeTempo(valores);
 
 				double distancia = (double) valores2[0];
 				double tempo = (double) valores2[1];
 				
-				validando(distancia,tempo);
-				
 				System.out.println("Valocidade Média:"+calcularVelocidadeMedia(distancia,tempo));
-				
-				System.out.println(calcularVelocidadeMedia(distancia,tempo));
 			
 			} catch (CiclistaException e) {
 				System.out.println("A distância e/ou a velocidade não podem ser zero!");
@@ -29,7 +24,7 @@ public class Ciclista {
 		}
 	}
 	
-	public static double[] interpretarValoresDeVelocidadeTempo(String valores) throws CiclistaException {
+	public static double[] interpretarValoresDeVelocidadeTempo(String valores){
 		
 		String[] separaValores = valores.split(" ");
 			
@@ -48,17 +43,17 @@ public class Ciclista {
 		return valoresInterpretados;
 	}
 
-	private static void validando(double distancia,double tempo)throws CiclistaException {
-		
-		if(tempo != 0 && distancia != 0){
-			calcularVelocidadeMedia(distancia,tempo);
-		}else{
+	private static void validar(double distancia,double tempo)throws CiclistaException {
+
+		if(tempo == 0 || distancia == 0){
 			throw new CiclistaException("A distância e o tempo devem ser maiores que zero!");
 		}
 		
 	}
 
-	public static double calcularVelocidadeMedia(double distancia,double tempo) {
+	public static double calcularVelocidadeMedia(double distancia,double tempo) throws CiclistaException {
+		
+		validar(distancia, tempo);
 		
 		double media = (Math.round(distancia / tempo));
 		
