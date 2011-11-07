@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Ciclista {
 	//criação de contantes para melhor compreensão do código
 	public static final String KILOMETROS = "km";
-	public final static String METROS = "m";
+	public static final String METROS = "m";
 	public static final String HORAS = "h";
 	public static final String MINUTOS = "m";
 	public static final String SEGUNDOS = "s";
