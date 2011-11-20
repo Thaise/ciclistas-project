@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ciclista {
@@ -12,18 +13,19 @@ public class Ciclista {
 
 	public static void main(String[] args) throws CiclistaException {
 		Scanner entrada = new Scanner(System.in);
+		ArrayList<Double> velocidades = new ArrayList<Double>();
 		
 		while(true){
-			System.out.print("Distância - Prefere qual unidade? Kilômetros(digite KM) ou Metros (digite M): ");
+			System.out.print("\nDistância - Prefere qual unidade? \nKilômetros(digite KM) ou Metros (digite M): ");
 			String unidadeDistancia = entrada.nextLine();
 			validarUnidadeDistancia(unidadeDistancia);
-			System.out.print("Tempo - Prefere qual unidade? Horas(digite H), Minutos(digite M) ou Segundos(digite S): ");
+			System.out.print("\nTempo - Prefere qual unidade? \nHoras(digite H), Minutos(digite M) ou Segundos(digite S): ");
 			String unidadeTempo = entrada.nextLine();
 			validarUnidadeTempo(unidadeTempo);
-			System.out.print("Como você deseja receber a velocidade média? Metros por Segundo(digite MS) ou Kilômetros por Hora(digite KH): ");
+			System.out.print("\nComo você deseja receber a velocidade média? \nMetros por Segundo(digite MS) ou Kilômetros por Hora(digite KH): ");
 			String unidadeVelocidade = entrada.nextLine();
 			validarUnidadeVelocidade(unidadeVelocidade);			
-			System.out.print("Dê a distância em "+unidadeDistancia+" e tempo em "+unidadeTempo+": ");
+			System.out.print("\nDê a distância em "+unidadeDistancia+" e tempo em "+unidadeTempo+": ");
 			String valores = entrada.nextLine();
 			try {
 				double[] valores2 = interpretarValoresDeDistanciaTempo(valores);
@@ -34,14 +36,62 @@ public class Ciclista {
 				double tempoPadrao = converterTempoParaPadrao (unidadeTempo,tempo);		
 				double distanciaConvertida = converterDistanciaConformeVelocidadeEscolhida(distanciaPadrao, unidadeVelocidade);		
 				double tempoConvertido = converterTempoConformeVelocidadeEscolhida(tempoPadrao, unidadeVelocidade);
-
-				System.out.println("Valocidade Média: "+calcularVelocidadeMedia(distanciaConvertida, tempoConvertido));			
+				double velocidadeMedia = calcularVelocidadeMedia(distanciaConvertida, tempoConvertido);
+				System.out.println("\nVelocidade Média: "+velocidadeMedia);
+				velocidades.add(velocidadeMedia);
+				
+				System.out.print("\nDeseja saber a velocidade mínima calculada até agora?\nDigite S para sim e N para não: ");
+				String velocidadeMinima = entrada.nextLine();
+				if(velocidadeMinima.equalsIgnoreCase("s")){
+					System.out.println("Velocidade mínima: "+calculaVelocidadeMinima(velocidades, velocidadeMinima));
+				}
+				
+				System.out.print("\nDeseja saber a velocidade máxima calculada até agora? \nDigite S para sim e N para não: ");
+				String velocidadeMaxima = entrada.nextLine();
+				if(velocidadeMaxima.equalsIgnoreCase("s")){
+					System.out.println("Velocidade máxima: "+calculaVelocidadeMaxima(velocidades, velocidadeMaxima));
+				}
+				
+				System.out.print("\nDeseja saber a velocidade média de todas as velocidades calculadas até agora?\nDigite S para sim e N para não: ");
+				String velocidadeMediaTotal = entrada.nextLine();
+				if(velocidadeMediaTotal.equalsIgnoreCase("s")){
+					System.out.println("Velocidade média total: "+calculaVelocidadeMediaTotal(velocidades, velocidadeMediaTotal));
+				}		
 			}catch (CiclistaException e) {
 				System.out.println("A distância e/ou o tempo não podem ser zero!");
-			}	 
+			}	
+
 		}
 	}
+
+	private static double calculaVelocidadeMinima(ArrayList<Double> velocidades, String velocidadeMinima) {
+		double velocidadeMinimaTotal = velocidades.get(0);
+		for(int i = 0; i < velocidades.size(); i++){
+			if(velocidadeMinimaTotal > velocidades.get(i)){
+				velocidadeMinimaTotal = velocidades.get(i);
+			}
+		}
+		return velocidadeMinimaTotal;
+	}
+
+	private static double calculaVelocidadeMaxima(ArrayList<Double> velocidades, String velocidadeMaxima) {
+		double velocidadeMaximaTotal = velocidades.get(0);
+		for(int i = 0; i < velocidades.size(); i++){
+			if(velocidadeMaximaTotal < velocidades.get(i)){
+				velocidadeMaximaTotal = velocidades.get(i);
+			}
+		}
+		return velocidadeMaximaTotal;
+	}
 	
+	private static double calculaVelocidadeMediaTotal(ArrayList<Double> velocidades, String velocidadeMediaTotal) {
+		double velocidadeMedia = 0;
+		for(int i = 0; i < velocidades.size(); i++){
+			velocidadeMedia = velocidadeMedia + velocidades.get(i);
+		}
+		return velocidadeMedia / velocidades.size();
+	}
+
 	private static void validarUnidadeDistancia(String unidadeDistancia) throws CiclistaException {
 		if((KILOMETROS.equalsIgnoreCase(unidadeDistancia)|| METROS.equalsIgnoreCase(unidadeDistancia)) == false){
 			throw new CiclistaException("A unidade de distância inválida!");
